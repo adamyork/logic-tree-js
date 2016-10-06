@@ -1,11 +1,5 @@
 'use strict';
 
-class LogicHandler {
-    constructor(...args) {
-        this.handlers = args;
-    }
-}
-
 class LogicBranch {
     constructor(condition, left, right) {
         this.condition = condition;
@@ -36,37 +30,39 @@ class LogicBranch {
 }
 
 class LogicTree {
-    constructor(handler) {
-        this.handler = handler;
+    constructor() {
+        this.varargs = arguments;
+        this.handlers = [];
         this.branches = [];
         this.terminated = 0;
+        this.handled = 0;
     }
-    if (condition) {
-        var branch = new LogicBranch(condition, [this.nextHandler()]);
+    iff(condition, handler) {
+        var branch = new LogicBranch(condition, [handler]);
+        this.varargs[0] += '>>';
         branch.name = 'branch ' + this.branches.length;
         this.branches.push(branch);
         return this;
     }
-    thenIf(condition) {
-        var branch = new LogicBranch(condition, [this.nextHandler()]);
+    thenIff(condition, handler) {
+        var branch = new LogicBranch(condition, [handler]);
         branch.name = 'branch ' + this.branches.length;
         var last = this.branches[this.branches.length - 1];
         last.left[1] = branch;
         this.branches.push(branch);
-        this.terminated++;
         return this;
     }
-    else() {
-        var index = this.branches.length - (this.terminated + 1);
-        if (arguments.length === 0) {
-            this.branches[index].right = [this.nextHandler()];
+    els(handler) {
+        var index = (this.branches.length - 1) - this.terminated - this.handled;
+        if (arguments.length === 1) {
+            this.branches[index].right = [handler];
         } else {
-            var branch = new LogicBranch(arguments[0], [this.nextHandler()]);
+            var branch = new LogicBranch(arguments[0], [arguments[1]]);
             branch.name = 'branch ' + this.branches.length;
             this.branches.push(branch);
             this.branches[index].right = [branch];
         }
-        this.terminated--;
+        this.handled++;
         return this;
     }
     end() {
@@ -75,8 +71,5 @@ class LogicTree {
     }
     evaluate() {
         this.branches[0].evaluate();
-    }
-    nextHandler() {
-        return this.handler.handlers[this.branches.length];
     }
 }
