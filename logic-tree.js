@@ -31,7 +31,6 @@ class LogicBranch {
 
 class LogicTree {
     constructor() {
-        this.varargs = arguments;
         this.handlers = [];
         this.branches = [];
         this.terminated = 0;
@@ -39,7 +38,6 @@ class LogicTree {
     }
     iff(condition, handler) {
         var branch = new LogicBranch(condition, [handler]);
-        this.varargs[0] += '>>';
         branch.name = 'branch ' + this.branches.length;
         this.branches.push(branch);
         return this;

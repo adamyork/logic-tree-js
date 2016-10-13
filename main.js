@@ -1,6 +1,6 @@
 var treeResults = '';
 
-function TestClassicControlFlowOutputMatchesLogicTree() {
+function testClassicControlFlowOutputMatchesLogicTree() {
     var cond1 = true;
     var cond2 = false;
     var cond3 = true;
@@ -42,11 +42,9 @@ function TestClassicControlFlowOutputMatchesLogicTree() {
     tree.evaluate();
 
     console.assert(treeResults === classicResults, 'test failed : output does not match');
-    console.log('TestClassicControlFlowOutputMatchesLogicTree passed classicResults: ' + classicResults +
-        ' treeResults ' + treeResults);
 }
 
-function TestClassicControlFlowOutputMatchesLogicTree2() {
+function testClassicControlFlowOutputMatchesLogicTree2() {
     var cond1 = false;
     var cond2 = true;
     var cond3 = true;
@@ -88,11 +86,9 @@ function TestClassicControlFlowOutputMatchesLogicTree2() {
     tree.evaluate();
 
     console.assert(treeResults === classicResults, 'test failed : output does not match');
-    console.log('TestClassicControlFlowOutputMatchesLogicTree2 passed classicResults: ' + classicResults +
-        ' treeResults ' + treeResults);
 }
 
-function TestClassicControlFlowOutputMatchesLogicTree3() {
+function testClassicControlFlowOutputMatchesLogicTree3() {
     var cond1 = true;
     var cond2 = false;
     var cond3 = false;
@@ -134,12 +130,10 @@ function TestClassicControlFlowOutputMatchesLogicTree3() {
     tree.evaluate();
 
     console.assert(treeResults === classicResults, 'test failed : output does not match');
-    console.log('TestClassicControlFlowOutputMatchesLogicTree3 passed classicResults: ' + classicResults +
-        ' treeResults ' + treeResults);
 }
 
-TestClassicControlFlowOutputMatchesLogicTree();
+testClassicControlFlowOutputMatchesLogicTree();
 this.treeResults = '';
-TestClassicControlFlowOutputMatchesLogicTree2();
+testClassicControlFlowOutputMatchesLogicTree2();
 this.treeResults = '';
-TestClassicControlFlowOutputMatchesLogicTree3();
+testClassicControlFlowOutputMatchesLogicTree3();
