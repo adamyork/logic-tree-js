@@ -57,6 +57,7 @@
         "_": true,
         "LogicTree": false,
         "LogicHandler": false,
+        "HandlerFunctions": false,
         "Chart": false,
         "chartTypeToken": false,
         "labelsToken": false,
